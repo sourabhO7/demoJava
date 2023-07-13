@@ -1,19 +1,19 @@
-package basicoperation;
+package statement;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-public class GloLogisticsUpdate {
+public class GloLogisticsCreate {
+
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/glologisticsdb";
         String username = "root";
         String password = "test";
 
-        String updateQuery = "UPDATE supplier\n" +
-                "SET supName = 'Mike supplier',\n" +
-                "    supType = 'Storage devices',\n" +
-                "    supCity = 'Kolkata',\n" +
-                "    supEmail = 'mike@gmail.com'\n" +
-                "WHERE supId = 'S101';\n";
+        String insertQuery = "INSERT INTO supplier (supId, supName, supType, supCity, supEmail)\n" +
+                             "VALUES ('S101', 'Sam Suppliers', 'Memory devices', 'Delhi', 'sam@gmail.com');\n";
 
         Connection con = null;
         Statement stmnt = null;
@@ -22,17 +22,18 @@ public class GloLogisticsUpdate {
             //database connection
             con = DriverManager.getConnection(url, username, password);
             stmnt = con.createStatement();
-            int rowsAffected = stmnt.executeUpdate(updateQuery);
+            int rowsAffected = stmnt.executeUpdate(insertQuery);
 
             if(rowsAffected>0)
-                System.out.println("Data updated succesfully: "+rowsAffected);
+                System.out.println("Data inserted succesfully: "+rowsAffected);
             else
-                System.out.println("Data update failed: "+rowsAffected);
-        } catch (SQLException e) {
+                System.out.println("Data insertion failed: "+rowsAffected);
+
+        }catch (SQLException e){
             System.out.println(e);
-        } finally {
+        }finally {
             try {
-                if (con != null && stmnt != null) {
+                if(con!=null && stmnt!=null) {
                     con.close();
                     stmnt.close();
                 }

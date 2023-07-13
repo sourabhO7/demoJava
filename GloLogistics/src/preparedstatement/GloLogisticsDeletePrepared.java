@@ -1,39 +1,44 @@
-package basicoperation;
+package preparedstatement;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public class GloLogisticsDelete {
+public class GloLogisticsDeletePrepared {
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/glologisticsdb";
         String username = "root";
         String password = "test";
 
-        String updateQuery = "DELETE FROM supplier\n" +
-                "WHERE supId = 'S101';\n";
+        String deleteQuery = "DELETE FROM supplier WHERE supId = ?";
 
         Connection con = null;
-        Statement stmnt = null;
+        PreparedStatement preStmnt = null;
 
         try {
             //database connection
             con = DriverManager.getConnection(url, username, password);
-            stmnt = con.createStatement();
-            int rowsAffected = stmnt.executeUpdate(updateQuery);
+
+            //prepared statement update operation
+            preStmnt = con.prepareStatement(deleteQuery);
+
+            preStmnt.setString(1,"S101");
+
+            int rowsAffected = preStmnt.executeUpdate();
 
             if(rowsAffected>0)
                 System.out.println("Data deleted succesfully: "+rowsAffected);
             else
-                System.out.println("Data deletion failed failed: "+rowsAffected);
-        } catch (SQLException e) {
+                System.out.println("Data deletion failed: "+rowsAffected);
+
+        }catch (SQLException e){
             System.out.println(e);
-        } finally {
+        }finally {
             try {
-                if (con != null && stmnt != null) {
+                if(con!=null && preStmnt!=null) {
                     con.close();
-                    stmnt.close();
+                    preStmnt.close();
                 }
             } catch (SQLException e) {
                 System.out.println(e);
