@@ -11,4 +11,17 @@ By transitioning to a database, GloLogistics aims to mitigate the issues of dupl
 With the adoption of a database-driven approach, GloLogistics is poised to optimize their logistics and supply chain operations, minimizing errors, and achieving greater control over their supplier network. The use of JDBC serves as a pivotal tool in this transformation, facilitating seamless communication between their application and the database, and ultimately fostering a more professional and reliable logistics ecosystem.
 
 
-In the example given in the code file hanling logic will not handle the duplicaiton problem wherese in jdbc code example the application will throw the exception when a duplicate entry is made into the record. 
+In the example, Alex a software engineer is performing the basic CRUD opeartion using statement object only. 
+
+**Table creation query**
+
+CREATE TABLE supplier (
+    supId VARCHAR(10) PRIMARY KEY,
+    supName VARCHAR(50),
+    supType VARCHAR(50),
+    supCity VARCHAR(50),
+    supEmail VARCHAR(100)
+);
+
+
+Database name should be **glologisticsdb**
