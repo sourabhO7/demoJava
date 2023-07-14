@@ -21,4 +21,4 @@ CREATE TABLE supplier (
 
 Database name should be **glologisticsdb**
 
-CREATE DATABASE glologistics;
+CREATE DATABASE glologistics; 
